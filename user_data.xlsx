@@ -1,0 +1,37 @@
+<?php
+// Database connection information
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "flutter";
+
+// Create a connection to the database
+$connection = new mysqli($host, $username, $password, $database);
+
+// Check the connection
+if ($connection->connect_error) {
+    die("Database connection failed: " . $connection->connect_error);
+}
+
+// Extract data from the Flutter interface
+$username = $_POST['username'];
+$number = $_POST['number'];
+$residency_type = $_POST['residency_type'];
+$id_card_number = $_POST['id_card_number'];
+family_size = $_POST['family_size'];
+$job_name = $_POST['job_name'];
+$notes = $_POST['notes'];
+
+// Use an SQL query to insert the data into the appropriate table
+$sql = "INSERT INTO haniii (username, number, residency_type, id_card_number, family_size, job_name, notes)
+        VALUES ('$username', $number, '$residency_type', $id_card_number, $family_size, '$job_name', '$notes')";
+
+if ($connection->query($sql) === TRUE) {
+    echo "Data saved successfully";
+} else {
+    echo "An error occurred while saving the data: " . $connection->error;
+}
+
+// Close the database connection
+$connection->close();
+?>
